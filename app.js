@@ -1,6 +1,7 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 // crear una lista 
 let amigos = [];
+let minimoAmigos = 3;
 const nombreAmigos = document.getElementById("amigo");
 
 
@@ -11,6 +12,7 @@ function agregarAmigo(){
 //si la caja del input esta vacia, mostrar alerta, sino, generar push y limpieza de la lista.
   if(nombreFinal === "") {
     let mensaje = alert("Por favor, inserte un nombre.")
+    return;
   } else {
     amigos.push(nombreFinal);
     limpiarCaja();
@@ -41,26 +43,26 @@ function sortearAmigo() {
   let actContenido = document.getElementById('resultado');
   actContenido.innerHTML= '';
 
-  if (amigos.length === 0) {
-    actContenido.innerHTML= '¡Ingrese un nombre para poder jugar!';
+  if (amigos.length <= minimoAmigos) {
+    actContenido.innerHTML= `Ingrese al menos ${minimoAmigos} nombres para realizar el Sorteo`;
+    return;
   }else {
     let sorteo = Math.floor(Math.random()*amigos.length);
-    let seleccionNombre = amigos[sorteo]; 
+    let seleccionNombre = amigos[sorteo];  
 
     actContenido.innerHTML = `El amigo secreto sorteado es: ${seleccionNombre}`;
-  }
+    
+    let limpiarLista = document.getElementById('listaAmigos');
+    limpiarLista.innerHTML = '';
 
+  }
 }
 
 
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    
+    document.getElementById('clickEnter').click();
+  }
+} );
 
-
-
-
-
-
-
-
-
-//el boton debe registrar y guardar los nombres
-//el boton aleatorio debe recoger un nombre de la lista para ser el amigo secreto
